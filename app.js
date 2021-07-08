@@ -19,7 +19,8 @@ const User = require("./models/user")
 
 const beachRoutes = require("./routes/beaches")
 const reviewRoutes = require("./routes/reviews")
-const userRoutes = require("./routes/users")
+const userRoutes = require("./routes/users");
+const { prototype } = require('ejs-mate/lib/block');
 
 const mongoDb = process.env.MONGO_DB;
 const tempDb = 'mongodb://localhost:27017/adria-unknown'
@@ -112,7 +113,8 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render("error", {err});
 })
 
-app.listen(3000, () => {
-    console.log("Port 3000 opened!")
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Hostamo na portu ${port}`)
 })
 
