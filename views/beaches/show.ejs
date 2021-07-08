@@ -1,0 +1,124 @@
+<% layout('/layouts/boilerplate') %> 
+<link rel="stylesheet" href="/stylesheets/stars.css">
+
+
+
+<!-- Display card -->
+
+
+<div class="container mt-5 mb-5">
+<div class="row">
+    <div class="col-md-6">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <% beach.images.forEach( (img, i) => {%> 
+          <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
+            <% if(img){ %> 
+            <img src="<%= img.url %>" class="d-block w-100" alt="">
+            <% } %> 
+          </div>
+         <% })  %> 
+        </div>
+        <% if(beach.images.length > 1) {%> 
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        <% }  %> 
+      </div>
+     
+        <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= beach.name  %> </h5>
+              <p class="card-text"><%= beach.description  %> </p>
+              <hr>
+              <p class="card-text"><%= beach.location  %> </p>
+              <p class="card-text text-muted">Stvorio/la @<%= beach.author.username %> </p>
+            </div>
+            <div class="card-body">
+              <a href="/beaches" class="btn btn-warning">Vrati se na popis plaža</a>
+              <% if(currentUser && currentUser.id === beach.author.id) { %> 
+              <a href="/beaches/<%= beach.id %>/edit" class="btn btn-info">Uredi plažu</a>
+              <form style="display: inline" action="/beaches/<%= beach.id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger">Obriši</button>
+            </form> 
+            <% } %>            
+            </div>
+          </div>
+    </div>
+
+<!-- Review section -->
+
+    <div class="col-md-6">
+      <div id='map' style='width: 100%; height: 300px;'></div>
+      <% if(currentUser) { %> 
+      <form action="/beaches/<%=beach.id%>/review" method="POST" class="my-3 validation" novalidate>
+        <div>
+
+<fieldset class="starability-basic mb-3">
+  <legend>Ocijeni</legend>
+  <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+  <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+  <label for="first-rate1" title="Terrible">1 star</label>
+  <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+  <label for="first-rate2" title="Not good">2 stars</label>
+  <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+  <label for="first-rate3" title="Average">3 stars</label>
+  <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+  <label for="first-rate4" title="Very good">4 stars</label>
+  <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+  <label for="first-rate5" title="Amazing">5 stars</label>
+</fieldset>
+
+        </div>
+        <div class="mb-3">
+          <label for="review" class="form-label">Napiši recenziju</label>
+        <textarea class="form-control" name="review[body]" id="review" cols="30" rows="3" required></textarea>
+        <div class="invalid-feedback">
+          Molim napišite nešto
+      </div>
+      <div class="valid-feedback">
+      Super!
+    </div>
+      </div>
+      <button class="btn btn-success">Potvrdi</button>
+    </form>
+    <% } %> 
+    <% if (!beach.reviews === []){ %> 
+    <%for(review of beach.reviews){  %> 
+       
+      <div class="card mb-3">
+        <div class="card-body">
+          <h6 class="card-subtitle text-muted"><b>@<%= review.author.username  %></b> </h6>
+          <p class="starability-result" data-rating="<%= review.rating %>">
+            Rated: <%= review.rating %> stars 
+          </p>
+          <p class="card-text">Recenzija: <%= review.body  %> </p>
+          <% if(currentUser && currentUser.id === review.author.id) { %> 
+          <form action="/beaches/<%= beach.id %>/review/<%= review.id %>?_method=DELETE" method="POST">
+          <button class="btn btn-sm btn-danger">Obriši</button>
+          </form>
+          <% } %> 
+        </div>
+      </div>
+        <% } %> 
+        <% } else {%> 
+          <h4 class="mt-3">Zasad nema recenzija</h4>
+          <% if(!currentUser) { %> 
+          <p class="mt-3">Ako želite ostaviti recenziju <a href="/login" class="btn btn-success">prijavite se</a></p>
+          <% } %>  
+          <% } %>  
+    
+    </div>
+</div>
+</div>
+<script>
+  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+  const beach = <%- JSON.stringify(beach) %>
+</script>
+
+<script src="/javascripts/mapScript.js"></script>

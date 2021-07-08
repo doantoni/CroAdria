@@ -1,0 +1,58 @@
+<% layout('/layouts/boilerplate') %> 
+    
+    <h1 class="text-center p-5">Nova plaža</h1>
+    <div class="col-6 offset-3 pb-5 px-5" style="width: 90vh; margin: auto">
+        <form id="form" action="/beaches" method="POST" novalidate class="validation" enctype="multipart/form-data">
+            <div class="mb-3"> 
+                <label class="form-label" for="name">Ime plaže</label>
+                <input class="form-control" type="text" id="name" name="beach[name]" required>
+                <div class="valid-feedback">
+                    Super!
+                </div>
+                <div class="invalid-feedback">
+                    Molim dodajte ime
+                </div>
+            </div>
+            
+            <div class="mb-3"> 
+                <label class="form-label" for="description">Opis plaže</label>
+                <textarea class="form-control" type="text" id="description" name="beach[description]" cols="20" rows="5" required></textarea>
+                <div class="valid-feedback">
+                    Super!
+                </div>
+                <div class="invalid-feedback">
+                    Molim dodajte opis
+                </div>
+            </div>
+            <div class="mb-3"> 
+                <label class="form-label" for="location">Lokacija (npr. "Bol, Brač, Croatia")</label>
+                <input class="form-control" type="text" id="location" name="beach[location]" placeholder="" required>
+                <div class="valid-feedback">
+                    Super!
+                </div>
+                <div class="invalid-feedback">
+                    Molim dodajte lokaciju
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Odaberite slike...</label>
+                <input class="form-control" type="file" id="image" name="image" multiple>
+              </div>
+            <!-- <div class="mb-3"> 
+                <label class="form-label" for="image">URL slike</label>
+                <input class="form-control" type="url" id="image" name="beach[image]" required>
+                <div class="valid-feedback">
+                    Super!
+                </div>
+                <div class="invalid-feedback">
+                    Molim dodajte url
+                </div>
+            </div>  -->
+               <button class="btn btn-primary mb-3">Dodaj plažu</button>
+            </form>
+                <div class="mb-3">
+                    <a href="/beaches" class="btn btn-warning">Vrati se na popis plaža</a>
+                </div>            
+    </div>
+
+

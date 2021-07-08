@@ -1,0 +1,45 @@
+<% layout('/layouts/boilerplate') %> 
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+            <div class="card shadow">
+                <img class="img-fluid" style="max-height: 150vh;" src="https://images.unsplash.com/photo-1525959526508-a37b4add7e70?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&q=80">                
+                <div class="card-body">
+                    <h5 class="card-title">Registacija</h5>
+                    <form action="/register" method="POST" class="validated-form" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Korisničko ime</label>
+                            <input class="form-control" type="text" id="username" name="username" required autofocus>
+                            <div class="valid-feedback">
+                                Super!
+                            </div>
+                            <div class="invalid-feedback">
+                                Molim dodajte korisničko ime
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" type="email" id="email" name="email" required>
+                            <div class="valid-feedback">
+                                Super!
+                            </div>
+                            <div class="invalid-feedback">
+                                Molim dodajte e-mail
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Lozinka</label>
+                            <input class="form-control" type="password" id="password" name="password" required>
+                            <div class="valid-feedback">
+                                Super!
+                            </div>
+                        </div>
+                        <button class="btn btn-success btn-block">Registrirajte se</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

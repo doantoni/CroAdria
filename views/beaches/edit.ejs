@@ -1,0 +1,57 @@
+<% layout('/layouts/boilerplate') %> 
+
+<h1 class="text-center">Uredi plažu</h1>
+<div class="col-6 offset-3">
+
+    <form action="/beaches/<%= beach.id%>?_method=PUT" method="POST" novalidate class="validation" enctype="multipart/form-data">
+        <div class="mb-3"> 
+            <label class="form-label" for="name">Ime plaže</label>
+            <input class="form-control" type="text" id="name" name="beach[name]" value="<%= beach.name %> " required>
+            <div class="valid-feedback">
+                Super!
+            </div>
+            <div class="invalid-feedback">
+                Molim dodajte ime
+            </div>
+        </div>
+        
+        <div class="mb-3"> 
+            <label class="form-label" for="description">Opis plaže</label>
+            <textarea class="form-control" type="text" id="description" name="beach[description]" cols="20" rows="5" required><%= beach.description %></textarea>
+            <div class="valid-feedback">
+                Super!
+            </div>
+            <div class="invalid-feedback">
+                Molim dodajte opis
+            </div>
+        </div>
+        <div class="mb-3"> 
+            <label class="form-label" for="location">Lokacija</label>
+            <input class="form-control" type="text" id="location" name="beach[location]" value="<%= beach.location %> " required>
+            <div class="valid-feedback">
+                Super!
+            </div>
+            <div class="invalid-feedback">
+                Molim dodajte lokaciju
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Dodajte još slika...</label>
+            <input class="form-control" type="file" id="image" name="image" multiple>
+          </div>
+          <div class="mb-3">
+              <% beach.images.forEach((img, i ) => { %>
+                <img src="<%= img.thumbnail %>" alt="" class="img-thumbnail">
+
+            <div class="form-check-inline">
+                <input type="checkbox" name="deleteImages[]" id="image-<%= i %>" value="<%= img.filename %>">
+            </div>
+            <label for="image-<%= i %>">Obriši?</label>
+             <% }) %> 
+          </div>
+           <button class="btn btn-info mb-3">Ažuriraj plažu</button>
+        </form>
+            <div class="mb-3">
+                <a href="/beaches/<%= beach.id %> ">Vrati se na plažu</a>
+            </div>            
+</div>

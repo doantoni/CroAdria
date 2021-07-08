@@ -1,0 +1,59 @@
+
+<% layout('/layouts/boilerplate') %> 
+
+
+    <div id="map" style="position: absolute ;width: 100%; height: 70vh; "></div>
+
+
+
+    <h1> Sve plaže</h1>
+
+    <div class="container" style="margin-top: 75vh;">
+    
+            <h3>
+                <a class="btn btn-primary my-2" href="/beaches/new">Dodaj novu plažu</a>
+            </h3>
+        
+
+        <div class="row">
+        
+                <% for (let beach of beaches){ %> 
+                   <div class="col-xxl-3 col-lg-4 col-md-6 rounded-circle">
+                    <div class="card mb-3 br-5 rounded">
+                           
+                                <%  if(beach.images[0]) { %>  
+                                <img class="img-fluid rounded-top" src="<%= beach.images[0].url%> " alt="">
+                               
+                                <% } else { %> 
+                                    
+                                   <img class="img-fluid" src="https://res.cloudinary.com/doantoni/image/upload/v1625654478/Screenshot_2021-07-07_at_12.40.18_encii8.png" alt="">
+                                    
+                                <% } %> 
+                    
+                            <div>
+                                <div class="card-body">
+                                    <div class="card-title"><b><%= beach.name  %> </b></div>
+                                    <div class="card-text mb-3"><%= beach.description.substring(0, 90) %>... </div>
+                                    <div class="card-text text-muted"><%= beach.location %> </div>
+                                    <a class="btn btn-primary mt-1" href="beaches/<%= beach.id %>">Pogledaj plažu</a>
+                                </div>
+                            </div>                        
+                </div>     
+            </div> 
+                <% }%>
+        
+            </div>
+        </div> 
+            <div><a href="/">Go Home</a></div>
+    </div>
+
+
+
+    <script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>'
+    </script> 
+    <script>
+    const beaches = {features: <%- JSON.stringify(beaches) %>} 
+    </script> 
+
+    <script src="javascripts/clusterMap.js"></script>
