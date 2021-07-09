@@ -1,4 +1,5 @@
 <% layout('/layouts/boilerplate') %> 
+<div id="googleMap" class="mb-3"></div>
 
 <h1 class="text-center">Uredi plažu</h1>
 <div class="col-6 offset-3">
@@ -35,6 +36,9 @@
                 Molim dodajte lokaciju
             </div>
         </div>
+
+     
+
         <div class="mb-3">
             <label for="image" class="form-label">Dodajte još slika...</label>
             <input class="form-control" type="file" id="image" name="image" multiple>
@@ -52,6 +56,7 @@
            <button class="btn btn-info mb-3">Ažuriraj plažu</button>
         </form>
             <div class="mb-3">
-                <a href="/beaches/<%= beach.id %> ">Vrati se na plažu</a>
+                <a href="/beaches/<%= beach.id %>" class="btn btn-warning">Vrati se na plažu</a>
             </div>            
 </div>
+

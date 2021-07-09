@@ -4,7 +4,7 @@ module.exports.beachSchema = Joi.object({
     beach: Joi.object({ 
         name: Joi.string().required(),
         description: Joi.string().required(),
-        location: Joi.string().required(),
+        location: Joi.string().required(),            
        /*  images: Joi.array().required()  */
     }).required(),
     deleteImages: Joi.array()

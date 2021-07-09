@@ -24,8 +24,9 @@
                     Molim dodajte opis
                 </div>
             </div>
+            
             <div class="mb-3"> 
-                <label class="form-label" for="location">Lokacija (npr. "Bol, Brač, Croatia")</label>
+                <label class="form-label" for="location">Lokacija (npr. "Bol, Brač, Hrvatska")</label>
                 <input class="form-control" type="text" id="location" name="beach[location]" placeholder="" required>
                 <div class="valid-feedback">
                     Super!
@@ -34,6 +35,15 @@
                     Molim dodajte lokaciju
                 </div>
             </div>
+           <!--  <div class="mb-3"> 
+                <label class="form-label" for="coordinates">Koordinate</label>
+                <input class="form-control" type="text" id="coordinates" name="beach[coordinates]" placeholder="[lng, lat]" value="">
+            </div> -->
+
+<!-- Google Map -->
+
+<!-- <div id='map' style='width: 100%; height: 300px;'></div> -->
+
             <div class="mb-3">
                 <label for="image" class="form-label">Odaberite slike...</label>
                 <input class="form-control" type="file" id="image" name="image" multiple>
@@ -56,3 +66,9 @@
     </div>
 
 
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+       
+      </script>
+
+<script src="/javascripts/mapScriptNew.js"></script>

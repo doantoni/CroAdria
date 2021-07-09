@@ -25,6 +25,9 @@ const { prototype } = require('ejs-mate/lib/block');
 const mongoDb = process.env.MONGO_DB;
 const tempDb = 'mongodb://localhost:27017/adria-unknown'
 
+
+app.locals.test = "test123"
+
 mongoose.connect(mongoDb || tempDb, {
     useNewUrlParser: true,
     useCreateIndex: true,

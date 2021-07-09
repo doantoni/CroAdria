@@ -17,7 +17,7 @@ module.exports.index = async (req, res, next) => {
 }
 
 module.exports.renderNewForm = (req, res) => {
-    res.render('beaches/new')
+    res.render('beaches/new',)
 }
 
 module.exports.newBeach = async (req, res, next) => {
@@ -28,6 +28,9 @@ module.exports.newBeach = async (req, res, next) => {
         const beach = new Beach(req.body.beach);
         console.log(req.body.beach);
         beach.geometry = geoData.body.features[0].geometry;
+        if (req.body.beach.coordinates){
+            beach.geometry.coordinates = req.body.beach.coordinates
+        }
         beach.images = req.files.map(f => ({url: f.path, filename: f.filename}))
         beach.author = req.user.id; 
         await beach.save();
