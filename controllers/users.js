@@ -27,7 +27,8 @@ module.exports.getLoginForm = (req, res) => {
 
 module.exports.login =  (req, res) => {
     req.flash("success", "Dobrodošli natrag!");
-    const redirectUrl = req.session.returnTo || '/beaches'
+    const backURL = req.header('Referer')
+    const redirectUrl = req.session.returnTo || "/beaches";
     res.redirect(redirectUrl);
 }
 

@@ -88,9 +88,15 @@
       <button class="btn btn-success">Potvrdi</button>
     </form>
     <% } %> 
-    <% if (!beach.reviews === []){ %> 
+
+    <%  if (beach.reviews.length > 0) { %> 
     <%for(review of beach.reviews){  %> 
-       
+     
+       <h4 class="mt-3">Recenzije 
+        <% if (!currentUser) {%>  
+         <a href="/login" class="btn btn-success" style="margin-left: 5em;">Ostavite recenziju</a>
+         <% }  %> 
+        </h4>
       <div class="card mb-3">
         <div class="card-body">
           <h6 class="card-subtitle text-muted"><b>@<%= review.author.username  %></b> </h6>
@@ -105,13 +111,14 @@
           <% } %> 
         </div>
       </div>
+    
         <% } %> 
-        <% } else {%> 
+        <%} else { %> 
           <h4 class="mt-3">Zasad nema recenzija</h4>
           <% if(!currentUser) { %> 
           <p class="mt-3">Ako želite ostaviti recenziju <a href="/login" class="btn btn-success">prijavite se</a></p>
           <% } %>  
-          <% } %>  
+        <% } %>
     
     </div>
 </div>
